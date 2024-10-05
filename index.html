@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Guessing Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 50px;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #message {
+            margin-top: 20px;
+            font-size: 18px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Password Guessing Game</h1>
+    <p>Guess the correct password!</p>
+    
+    <input type="password" id="user-input" placeholder="Enter password">
+    <button onclick="checkPassword()">Guess</button>
+
+    <p id="message"></p>
+
+    <script>
+        const correctPassword = "letmein";
+        let attempts = 0;
+        const maxAttempts = 3;
+
+        function checkPassword() {
+            const userInput = document.getElementById('user-input').value;
+            attempts++;
+
+            if (userInput === correctPassword) {
+                document.getElementById('message').innerHTML = "Congratulations! You've guessed the correct password.";
+            } else if (attempts < maxAttempts) {
+                document.getElementById('message').innerHTML = "Incorrect password. You have " + (maxAttempts - attempts) + " attempts left.";
+                if (attempts === maxAttempts - 1) {
+                    document.getElementById('message').innerHTML += "<br>Hint: What does Cyn repeat when scratching N's chest in Murder Drones? (No spaces)";
+                }
+            } else {
+                document.getElementById('message').innerHTML = "Sorry, you've used all your attempts. Access denied!";
+                document.getElementById('user-input').disabled = true;
+            }
+        }
+    </script>
+</body>
+</html>
